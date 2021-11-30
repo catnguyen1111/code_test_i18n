@@ -1,0 +1,76 @@
+<p>HỌC VỀ REACTIVE FORM</p>
+<br>
+<div class="container">
+  <form   [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input  id="name" type="text" (click) ="check()" class="form-control" formControlName="name">
+      <span *ngIf = "profileForm.controls.name.value === '' "
+       >*cần phải nhập name</span>
+       <!-- <span *ngIf = "profileForm.controls.name.touched === false"
+       >*ra khỏi input</span> -->
+       <span *ngIf = "profileForm.controls.name.errors?.minlength "
+       >*ký tự 1-20</span>
+       <span *ngIf = "profileForm.controls.name.errors?.maxlength "
+       >*ký tự 1-20</span>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Age:</label>
+      <input  id="name" type="text" class="form-control" formControlName="age">
+      <span *ngIf = "profileForm.controls.age.value === '' ">*cần phải nhập age</span>
+    </div>
+
+      <div class="form-group">
+        <label for="street">Street: </label>
+        <input id="street" type="text" class="form-control" formControlName="street">
+      </div>
+      <div class="form-group">
+        <label for="city">City: </label>
+        <input id="city" type="text" class="form-control" formControlName="city">
+      </div>
+      <div class="form-group">
+        <label for="state">State: </label>
+        <input id="state" type="text" class="form-control" formControlName="state">
+      </div>
+      <div class="form-group">
+        <label for="zip">Zip Code: </label>
+        <input id="zip" type="text" class="form-control" formControlName="zip">
+      </div>
+      <div formArrayName="alias">
+        <h2>Aliases</h2>
+        <button (click)="addAlias()" type="button">+ Add another alias</button>
+
+        <div *ngFor="let alia of alias.controls; let i=index">
+          <!-- The repeated alias template -->
+          <label for="alia-{{ i }}">Alias:</label>
+          <input id="alia-{{ i }}" type="text" [formControlName]="i">
+        </div>
+      </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid" (click)="updateName()">Update Name</button>
+    </div>
+  </form>
+</div>
+<!-- <div class="container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input required id="name" type="text" class="form-control" [formControl]="name">
+      <span *ngIf="name.value === ''" >*cần phải nhập name</span>
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input required id="age" type="text" class="form-control" [formControl]="age">
+      <span >*cần phải nhập age</span>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" (click)="updateName()">Update Name</button>
+    </div>
+  </form>
+</div> -->
+
+
