@@ -47,3 +47,4 @@ export class AppModule { }
 export function translateFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
+//dùng ngx-translate
